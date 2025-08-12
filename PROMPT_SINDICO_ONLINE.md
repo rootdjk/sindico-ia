@@ -110,3 +110,4 @@ SINDICO IA/
 4. Aguarde o resultado final
 
 **Agora você pode seguir esses passos! O agente vai criar tudo automaticamente.** 🎉
+

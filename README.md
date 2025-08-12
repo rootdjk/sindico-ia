@@ -79,3 +79,4 @@ Para adicionar novas tarefas em background, edite o objeto `backgroundTasks` no 
 ## 📞 Suporte
 
 Para dúvidas ou problemas, entre em contato com a equipe de desenvolvimento.
+

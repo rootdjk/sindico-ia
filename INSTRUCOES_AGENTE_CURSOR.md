@@ -112,3 +112,4 @@ npm --version
 - **Destaque**: #CC0000 (Vermelho escuro)
 - **Fundo**: #FFFFFF (Branco)
 - **Texto**: #333333 (Cinza escuro)
+
