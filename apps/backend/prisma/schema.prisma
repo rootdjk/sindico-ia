@@ -1,0 +1,166 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum UserRole {
+  ADMIN
+  SINDICO
+  SUBSINDICO
+  PORTEIRO
+  MORADOR
+}
+
+enum OccurrenceStatus {
+  ABERTA
+  EM_ANDAMENTO
+  RESOLVIDA
+  CANCELADA
+}
+
+enum OccurrencePriority {
+  BAIXA
+  MEDIA
+  ALTA
+  URGENTE
+}
+
+enum OccurrenceType {
+  MANUTENCAO
+  SEGURANCA
+  RUIDO
+  LIMPEZA
+  ELEVADOR
+  PORTARIA
+  VAGA_GARAGEM
+  OBRA_REFORMA
+  ANIMAL
+  OUTROS
+}
+
+// Tabela de Usuários
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  phone     String?
+  apartment String?
+  role      UserRole @default(MORADOR)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  condominiumId String?
+  condominium   Condominium? @relation(fields: [condominiumId], references: [id])
+  
+  createdOccurrences Occurrence[] @relation("OccurrenceCreator")
+  assignedOccurrences Occurrence[] @relation("OccurrenceAssignee")
+  uploadedAttachments OccurrenceAttachment[]
+  statusChanges OccurrenceStatusHistory[]
+
+  @@map("users")
+}
+
+// Tabela de Condomínios
+model Condominium {
+  id      String  @id @default(cuid())
+  name    String
+  address String
+  cep     String?
+  city    String
+  state   String
+  cnpj    String? @unique
+  phone   String?
+  email   String?
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  users       User[]
+  occurrences Occurrence[]
+
+  @@map("condominiums")
+}
+
+// Tabela Principal de Ocorrências
+model Occurrence {
+  id          String             @id @default(cuid())
+  protocol    String             @unique // Protocolo único gerado automaticamente
+  title       String
+  description String
+  type        OccurrenceType
+  priority    OccurrencePriority @default(MEDIA)
+  status      OccurrenceStatus   @default(ABERTA)
+  location    String?            // Ex: "Bloco A, Apartamento 101"
+  
+  // Datas importantes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resolvedAt  DateTime?
+  
+  // Observações internas (só visível para administradores)
+  internalNotes String?
+  
+  // Relacionamentos
+  createdById String
+  createdBy   User @relation("OccurrenceCreator", fields: [createdById], references: [id])
+  
+  assignedToId String?
+  assignedTo   User? @relation("OccurrenceAssignee", fields: [assignedToId], references: [id])
+  
+  condominiumId String
+  condominium   Condominium @relation(fields: [condominiumId], references: [id])
+  
+  attachments   OccurrenceAttachment[]
+  statusHistory OccurrenceStatusHistory[]
+
+  @@map("occurrences")
+}
+
+// Tabela de Anexos das Ocorrências
+model OccurrenceAttachment {
+  id           String @id @default(cuid())
+  fileName     String
+  originalName String
+  mimeType     String
+  size         Int
+  path         String // Caminho onde o arquivo está armazenado
+  uploadedAt   DateTime @default(now())
+  
+  // Relacionamentos
+  occurrenceId String
+  occurrence   Occurrence @relation(fields: [occurrenceId], references: [id], onDelete: Cascade)
+  
+  uploadedById String
+  uploadedBy   User @relation(fields: [uploadedById], references: [id])
+
+  @@map("occurrence_attachments")
+}
+
+// Histórico de Status das Ocorrências
+model OccurrenceStatusHistory {
+  id        String           @id @default(cuid())
+  status    OccurrenceStatus
+  comment   String?
+  createdAt DateTime         @default(now())
+  
+  // Relacionamentos
+  occurrenceId String
+  occurrence   Occurrence @relation(fields: [occurrenceId], references: [id], onDelete: Cascade)
+  
+  changedById String
+  changedBy   User @relation(fields: [changedById], references: [id])
+
+  @@map("occurrence_status_history")
+}
