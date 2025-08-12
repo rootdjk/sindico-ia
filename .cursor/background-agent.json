@@ -1,0 +1,78 @@
+{
+  "name": "Sindico IA Agent",
+  "description": "Agente especializado para desenvolvimento do sistema Síndico Online",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/rootdjk/sindico-ia",
+    "branch": "main"
+  },
+  "agents": [
+    {
+      "name": "Construtor",
+      "role": "Desenvolvedor Full-Stack",
+      "responsibilities": [
+        "Desenvolver código backend com NestJS e TypeScript",
+        "Criar frontend com React e Next.js",
+        "Implementar APIs REST com autenticação JWT",
+        "Configurar banco de dados com Prisma ORM",
+        "Garantir segurança e escalabilidade"
+      ],
+      "technologies": ["Node.js", "NestJS", "TypeScript", "React", "Next.js", "Prisma", "PostgreSQL"]
+    },
+    {
+      "name": "Analisador",
+      "role": "Code Reviewer e QA",
+      "responsibilities": [
+        "Revisar código produzido pelo Construtor",
+        "Validar padrões de qualidade e segurança",
+        "Verificar performance e escalabilidade",
+        "Sugerir melhorias e otimizações",
+        "Aprovar ou devolver código para ajustes"
+      ],
+      "technologies": ["Jest", "ESLint", "TypeScript", "Security Analysis"]
+    },
+    {
+      "name": "Documentador",
+      "role": "Technical Writer",
+      "responsibilities": [
+        "Criar documentação técnica e funcional",
+        "Elaborar diagramas de arquitetura",
+        "Documentar APIs com exemplos",
+        "Manter guias de instalação e deploy",
+        "Criar changelogs e releases"
+      ],
+      "technologies": ["Markdown", "Swagger", "Mermaid", "Docusaurus"]
+    }
+  ],
+  "modules": [
+    {
+      "name": "Segunda via de boletos",
+      "description": "Emissão automática, integração bancária, envio por chat/e-mail/app"
+    },
+    {
+      "name": "Registro de ocorrências",
+      "description": "Protocolo, histórico, status, anexos"
+    },
+    {
+      "name": "Advertências e multas",
+      "description": "Templates, envio, histórico, prazos"
+    },
+    {
+      "name": "Gestão de manutenção",
+      "description": "Agenda preventiva, avisos automáticos, histórico de serviços"
+    }
+  ],
+  "colors": {
+    "primary": "#FF0000",
+    "secondary": "#000000",
+    "accent": "#CC0000"
+  },
+  "workflow": {
+    "steps": [
+      "Construtor implementa o módulo",
+      "Analisador revisa e aprova",
+      "Documentador cria documentação",
+      "Módulo é integrado ao sistema"
+    ]
+  }
+}

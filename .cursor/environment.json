@@ -1,0 +1,10 @@
+{
+  "terminals": [],
+  "backgroundAgent": {
+    "enabled": true,
+    "config": ".cursor/background-agent.json",
+    "script": ".cursor/agent-script.js",
+    "repository": "https://github.com/rootdjk/sindico-ia",
+    "branch": "main"
+  }
+}
