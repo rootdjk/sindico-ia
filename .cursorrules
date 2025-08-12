@@ -1,0 +1,32 @@
+# Regras do Cursor para o projeto SINDICO IA
+
+## Contexto do Projeto
+Este é um sistema governamental para o estado da Paraíba, desenvolvido com as cores oficiais (vermelho e preto).
+
+## Linguagem e Comunicação
+- Sempre responda em português brasileiro
+- Use linguagem formal e técnica apropriada para sistemas governamentais
+- Mantenha o tom profissional e acessível
+
+## Cores e Design
+- Use as cores do Paraíba: vermelho (#FF0000) como cor primária e preto (#000000) como secundária
+- Mantenha o design limpo e profissional
+- Priorize a acessibilidade e usabilidade
+
+## Estrutura do Código
+- Use JavaScript/Node.js para o backend
+- Mantenha o código bem documentado em português
+- Siga as melhores práticas de desenvolvimento
+- Use nomes de variáveis e funções descritivos em português
+
+## Funcionalidades do Agente
+- O agente deve executar tarefas em background automaticamente
+- Implemente logs detalhados para auditoria
+- Mantenha a segurança e confiabilidade do sistema
+- Priorize a performance e eficiência
+
+## Padrões de Desenvolvimento
+- Use async/await para operações assíncronas
+- Implemente tratamento de erros robusto
+- Mantenha a compatibilidade com sistemas governamentais
+- Documente todas as APIs e endpoints
